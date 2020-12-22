@@ -4,23 +4,31 @@ import { RouterModule } from '@angular/router';
 
 // ***************************************************************************** //
 
+import { RatingModule } from 'ng-starrating';
+
+// ***************************************************************************** //
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
+import { PeliculasPosterGridComponent } from './peliculas-poster-grid/peliculas-poster-grid.component';
 
 // ***************************************************************************** //
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    SlideshowComponent
+    SlideshowComponent,
+    PeliculasPosterGridComponent
   ],
   exports: [
     NavbarComponent,
-    SlideshowComponent
+    SlideshowComponent,
+    PeliculasPosterGridComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    RatingModule
   ]
 })
 export class ComponentsModule { }
