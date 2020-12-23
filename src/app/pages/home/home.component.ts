@@ -5,7 +5,6 @@ import { pluck } from 'rxjs/operators';
 
 import { PeliculasService } from '../../services/peliculas.service';
 
-
 // ************************************************************************ //
 
 import { Movie } from '../../interfaces/cartelera-response.interface';
@@ -31,12 +30,14 @@ export class HomeComponent implements OnInit {
     if ( pos > max ) {
 
       // TODO: call service
-      this.peliculasService.getCartelera()
-      .pipe( pluck('results') )
-      .subscribe(
-        resp => {
+      if ( this.peliculasService.cargando ) { return; }
 
-          this.movies.push(...resp);
+
+      this.peliculasService.getCartelera()
+      .subscribe(
+        movies => {
+
+          this.movies.push(...movies);
 
         },
 
@@ -64,9 +65,7 @@ export class HomeComponent implements OnInit {
 
   obtenerPeliculas(): any {
 
-    this.peliculasService.getCartelera().pipe(
-      pluck('results')
-    ).subscribe(
+    this.peliculasService.getCartelera().subscribe(
 
       resp  => {
 
