@@ -16,11 +16,6 @@ export class PosterPipe implements PipeTransform {
       return './assets/img/no-image.jpg';
 
     }
-    // https://image.tmdb.org/t/p/w500{{ movie.poster_path }}
-
-    console.log(poster);
-
-    return poster;
 
   }
 
