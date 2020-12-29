@@ -7,6 +7,7 @@ import { StarRatingComponent } from 'ng-starrating';
 // ************************************************************************ //
 
 import { Movie } from '../../interfaces/cartelera-response.interface';
+import { Router } from '@angular/router';
 
 // ************************************************************************ //
 
@@ -19,7 +20,9 @@ export class PeliculasPosterGridComponent implements OnInit {
 
   @Input() movies: Movie[] = [];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
@@ -34,6 +37,12 @@ export class PeliculasPosterGridComponent implements OnInit {
       Checked Color: ${$event.starRating.checkedcolor},
       Unchecked Color: ${$event.starRating.uncheckedcolor}`
     );
+  }
+
+  onMovieClick( movie: Movie ): void{
+
+    this.router.navigate( ['/pelicula', movie.id] );
+
   }
 
 

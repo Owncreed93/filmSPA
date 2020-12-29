@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response.interface';
 import { tap, pluck } from 'rxjs/operators';
+import { MovieResponse } from '../interfaces/movie-response';
 
 // ************************************************************************ //
 @Injectable({
@@ -38,6 +39,12 @@ export class PeliculasService {
 
   }
 
+  resetCarteleraPage(): void {
+
+    this.carteleraPage = 1;
+
+  }
+
   getCartelera(): Observable<Movie[]> {
 
     // CARGANDO PELICULAS
@@ -66,6 +73,12 @@ export class PeliculasService {
     return this.http.get<CarteleraResponse>( `${this.baseUrl}/search/movie`, { params } )
     .pipe( pluck('results') );
 
+
+  }
+
+  getPeliculaDetalle( id: string ): Observable<MovieResponse>{
+
+    return this.http.get<MovieResponse>( `${this.baseUrl}/movie/${id}`, { params: this.params } );
 
   }
 

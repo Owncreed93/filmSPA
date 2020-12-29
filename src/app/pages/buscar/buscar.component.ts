@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { param } from 'jquery';
+
+// ******************************************************************************** //
+
 import { PeliculasService } from '../../services/peliculas.service';
 
+// ******************************************************************************** //
+
+import { Movie } from '../../interfaces/cartelera-response.interface';
+
+// ******************************************************************************** //
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.component.html',
@@ -10,6 +17,9 @@ import { PeliculasService } from '../../services/peliculas.service';
   ]
 })
 export class BuscarComponent implements OnInit {
+
+  public searchTerm: string;
+  public movies: Movie[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,16 +31,20 @@ export class BuscarComponent implements OnInit {
     this.activatedRoute.params.subscribe(
 
       params => {
+
         console.log(params);
         this.peliculasService.buscarPeliculas( params.texto ).subscribe(
 
           movies => {
 
-            console.log(movies);
+            this.searchTerm = params.texto;
+
+            this.movies = movies;
 
           }
 
         );
+
       },
 
       error => console.error( error )
