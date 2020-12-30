@@ -26,7 +26,8 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/styles.css",
-              "node_modules/swiper/swiper-bundle.min.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/animate.css/animate.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",

@@ -15,6 +15,7 @@ import { PeliculasPosterGridComponent } from './peliculas-poster-grid/peliculas-
 
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
+import { CastSlideshowComponent } from './cast-slideshow/cast-slideshow.component';
 
 // ***************************************************************************** //
 
@@ -22,12 +23,14 @@ import { PipesModule } from '../pipes/pipes.module';
   declarations: [
     NavbarComponent,
     SlideshowComponent,
-    PeliculasPosterGridComponent
+    PeliculasPosterGridComponent,
+    CastSlideshowComponent
   ],
   exports: [
     NavbarComponent,
     SlideshowComponent,
-    PeliculasPosterGridComponent
+    PeliculasPosterGridComponent,
+    CastSlideshowComponent
   ],
   imports: [
     CommonModule,

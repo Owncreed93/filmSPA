@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { tap, pluck, catchError } from 'rxjs/operators';
 
 // ************************************************************************ //
 
 import { CarteleraResponse, Movie } from '../interfaces/cartelera-response.interface';
-import { tap, pluck } from 'rxjs/operators';
 import { MovieResponse } from '../interfaces/movie-response';
+import { CreditsResponse, Cast } from '../interfaces/credits-response';
 
 // ************************************************************************ //
 @Injectable({
@@ -69,16 +70,26 @@ export class PeliculasService {
 
     const params = { ...this.params, page: 1, query: texto };
 
-    // https://api.themoviedb.org/3/search/movie?
     return this.http.get<CarteleraResponse>( `${this.baseUrl}/search/movie`, { params } )
     .pipe( pluck('results') );
 
 
   }
 
-  getPeliculaDetalle( id: string ): Observable<MovieResponse>{
+  getPeliculaDetalle( id: string ): Observable<any>{
 
-    return this.http.get<MovieResponse>( `${this.baseUrl}/movie/${id}`, { params: this.params } );
+    return this.http.get<MovieResponse>( `${this.baseUrl}/movie/${id}`, { params: this.params } ).pipe(
+      catchError( err => of([]) )
+    );
+
+  }
+
+  getCastDetalle( id: string ): Observable<Cast[]>{
+
+    return this.http.get<CreditsResponse>( `${this.baseUrl}/movie/${id}/credits`, { params: this.params } ).pipe(
+      pluck( 'cast' ),
+      catchError( err => of([]) )
+    );
 
   }
 
